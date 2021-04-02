@@ -1,29 +1,35 @@
-<h4 class="card-header mb-5">Invitations : You're logged in</h4>
+<div class="container-fluid home-page">
+  <h4 class="card-header mb-5">Invitations : You're logged in</h4>
 
-<div class="row" *ngIf="invitations">
-  <div class="col-12 col-sm-6 col-md-4 mb-5" *ngFor="let x of invitations">
-    <div class="card h-100" [class.read]="x.status == 'read'">
-      <!-- <img
+  <div class="row" *ngIf="invitations">
+    <div class="col-12 col-sm-6 col-md-4 mb-5" *ngFor="let x of invitations">
+      <div
+        class="card h-100"
+        [ngClass]="x.status == 'read' ? ' read' : 'text-white bg-dark'"
+      >
+        <!-- <img
             class="card-img-top"
             src="/images/pathToYourImage.png"
             alt="Card image cap"
           /> -->
-      <div class="card-body">
-        <h4 class="card-title">{{ x.vector }}</h4>
-        <p class="card-text" [innerHTML]="x.invite"></p>
-        <p>
-          Time:
-          {{ toDateTime(x.invite_time) | date: "MMM d, y, h:mm:ss a" }}
-        </p>
-        <button
-          href="#!"
-          class="btn btn-primary"
-          [disabled]="x.status == 'read'"
-        >
-          Go somewhere
-        </button>
+        <div class="card-body">
+          <h4 class="card-title">{{ x.vector }}</h4>
+          <p class="card-text" [innerHTML]="x.invite"></p>
+          <p>
+            Time:
+            {{ toDateTime(x.invite_time) | date: "MMM d, y, h:mm:ss a" }}
+          </p>
+          <button
+            href="#!"
+            class="btn"
+            [ngClass]="x.status == 'read' ? '' : 'btn-primary'"
+            [disabled]="x.status == 'read'"
+          >
+            Go somewhere
+          </button>
+        </div>
       </div>
+      {{ x.firstName }} {{ x.lastName }}
     </div>
-    {{ x.firstName }} {{ x.lastName }}
   </div>
 </div>
