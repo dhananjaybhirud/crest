@@ -2,16 +2,21 @@
   <div class="card">
     <div class="card-body">
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <h4 class="text-center">Login</h4>
         <div class="form-group">
-          <label for="username">Username or emal</label>
+          <label for="username">Email</label>
           <input
             type="text"
             formControlName="username"
             class="form-control"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
             [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
           />
           <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-            <div *ngIf="f.username.errors.required">Username is required</div>
+            <div *ngIf="f.username.errors.required">Email is required</div>
+            <p *ngIf="f.username.errors?.pattern">
+              This is not a valid Email!!!
+            </p>
           </div>
         </div>
         <div class="form-group">
